@@ -1,0 +1,79 @@
+body {
+    display: flex;
+    justify-content: center; 
+    align-items: center;     
+    min-height: 100vh;  
+    flex-direction: column;  
+}
+
+
+/* Menu styling */
+.menu {
+    width: 100%;
+    background-color: #333;
+}
+
+.menu td {
+    padding: 15px;
+    text-align: center;
+    background-color: #444;
+}
+
+.menu td a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.menu td:hover {
+    background-color: #555;
+}
+
+/* Text and image alignment */
+.text-format {
+    text-align: justify;
+    line-height: 1.6;
+    clear: both;
+    overflow: hidden;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center; 
+    margin-left: 0;    
+}
+
+
+
+/* Image alignment */
+img {
+    float: left;
+    margin-right: 15px;
+    margin-bottom: 15px;
+    max-width: 300px; /* Ensure images don't get too large */
+}
+
+/* Bold, italic, underline, highlight styles */
+.bold {
+    font-weight: bold;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+.highlight {
+    background-color: yellow;
+    font-weight: bold;
+}
+
+/* Adding clearfix to ensure proper image layout */
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}

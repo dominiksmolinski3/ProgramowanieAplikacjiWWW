@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Mosty</title>
+    <script src="menu.js"></script>
+    <script src="colorbackground.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="centered-content" onload="loadMenu(); loadBackground();">
+    <div id="menu"></div>
+
+    <form method="POST" name="background">
+        <input type="button" value="Tło 1" onclick="changeBackground('img/backgrounds/background1.jpg')">
+        <input type="button" value="Tło 2" onclick="changeBackground('img/backgrounds/background2.jpg')">
+        <input type="button" value="Tło 3" onclick="changeBackground('img/backgrounds/background3.jpg')">
+    </form>
+    
+</body>
+
+</html>

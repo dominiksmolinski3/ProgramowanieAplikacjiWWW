@@ -1,0 +1,174 @@
+body {
+    margin-top: 120px;  
+    min-height: 100vh;  
+    background-image: url('img/backgrounds/background1.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.centered-content {
+    margin-top: 70px;  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+    background-image: url('img/backgrounds/background1.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+#zegarek, #data {
+    font-size: 24px;
+    text-align: center;
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.centered-clock {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* Menu styling */
+.menu {
+    display: flex;
+    width: 100%;
+    border-collapse: collapse;
+    justify-content: center;
+    background-color: #333;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    position: fixed; 
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000; 
+}
+
+.menu td {
+    text-align: center;
+    vertical-align: middle;
+    padding: 15px 20px;
+    margin: 0 10px;
+    background-color: #444;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* smooth transition */
+}
+
+.menu td:hover {
+    background-color: #555;
+    transform: translateY(-3px); /* slight lifting effect */
+}
+
+.menu td a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-family: 'Arial', sans-serif;
+    font-size: 18px;
+}
+
+/* Text and image alignment */
+.text-format {
+    text-align: justify;
+    line-height: 1.6;
+    clear: both;
+    overflow: hidden;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center; 
+    margin-left: 0;    
+}
+
+/* Image alignment */
+img {
+    float: left;
+    margin-right: 15px;
+    margin-bottom: 15px;
+    max-width: 600px; /* Ensure images don't get too large */
+}
+
+/* Bold, italic, underline, highlight styles */
+.bold {
+    font-weight: bold;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+.highlight {
+    background-color: rgb(255, 255, 140);
+    font-weight: bold;
+}
+
+/* Adding clearfix to ensure proper image layout */
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.contact {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+/* Button styles */
+
+form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+input[type="button"] {
+    background-color: #4CAF50; 
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px 5px;
+    cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="button"]:hover {
+    background-color: #45a049;
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+input[type="button"]:active {
+    background-color: #3e8e41;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transform: translateY(2px);
+}

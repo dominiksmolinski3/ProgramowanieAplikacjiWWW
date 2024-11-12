@@ -1,33 +1,33 @@
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-    <meta charset="UTF-8">
-    <title>Mosty</title>
-    <link rel="stylesheet" href="css/style.css">
-    <script src="js/menu.js"></script>
-    <script src="js/colorbackground.js"></script>
-    <script src="js/timedate.js"></script>
-    <script src="js/jquery.js"></script>
-</head>
-<body class="centered-content" onload="loadMenu(); loadIndexBackground(); startclock();">
-    <div id="menu"></div>
-    <div id="zegarek"></div>
-    <div id="data"></div>
+<?php
+error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING);
 
-    <?php
-        $page = isset($_GET['page']) ? $_GET['page'] : 'home';
+$pages = [
+    'home' => 'home.php',
+    'gallery' => 'gallery.php',
+    'most1' => 'php/most1.php',
+    'most2' => 'php/most2.php',
+    'most3' => 'php/most3.php',
+    'most4' => 'php/most4.php',
+    'most5' => 'php/most5.php',
+    'changebackground' => 'php/changebackground.php',
+    'kontakt' => 'php/kontakt.php',
+    'videos'=> 'php/videos.php'
+];
 
-        switch ($page) {
-            case 'gallery':
-                include 'gallery.php';
-                break;
-            case 'home':
-            default:
-                include 'home.php';
-                break;
-        }
-    ?>
+$page = isset($_GET['page']) ? $_GET['page'] : 'home';
+$file_to_include = isset($pages[$page]) ? $pages[$page] : $pages['home'];
 
-    <script src="js/main.js"></script>
-</body>
-</html>
+if (file_exists($file_to_include)) {
+    ob_start(); 
+    include $file_to_include; 
+    $content = ob_get_clean(); 
+} else {
+    $content = "<p>Page not found.</p>";
+}
+
+$template = file_get_contents('html/template.html');
+
+$output = str_replace('{{content}}', $content, $template);
+
+echo $output;
+?>

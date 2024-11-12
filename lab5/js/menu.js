@@ -7,13 +7,14 @@ function loadMenu() {
             <tr>
                 <td><a href="${pathPrefix}index.php?page=home">Strona Główna</a></td>
                 <td><a href="${pathPrefix}index.php?page=gallery">Galeria Mostów</a></td>
-                <td><a href="${pathPrefix}php/most1.php">Akashi Kaikyō</a></td>
-                <td><a href="${pathPrefix}php/most2.php">Hong Kong-Zhuhai-Macau</a></td>
-                <td><a href="${pathPrefix}php/most3.php">Golden Gate</a></td>
-                <td><a href="${pathPrefix}php/most4.php">Vasco da Gama</a></td>
-                <td><a href="${pathPrefix}php/most5.php">Brooklyn Bridge</a></td>
-                <td><a href="${pathPrefix}php/kontakt.php">Kontakt</a></td>
-                <td><a href="${pathPrefix}php/changebackground.php">Zmień tło</a></td>
+                <td><a href="${pathPrefix}index.php?page=videos">Filmy</a></td>
+                <td><a href="${pathPrefix}index.php?page=most1">Akashi Kaikyō</a></td>
+                <td><a href="${pathPrefix}index.php?page=most2">Hong Kong-Zhuhai-Macau</a></td>
+                <td><a href="${pathPrefix}index.php?page=most3">Golden Gate</a></td>
+                <td><a href="${pathPrefix}index.php?page=most4">Vasco da Gama</a></td>
+                <td><a href="${pathPrefix}index.php?page=most5">Brooklyn Bridge</a></td>
+                <td><a href="${pathPrefix}index.php?page=kontakt">Kontakt</a></td>
+                <td><a href="${pathPrefix}index.php?page=changebackground">Zmień tło</a></td>
             </tr>
         </table>`;
 

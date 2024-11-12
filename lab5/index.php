@@ -4,14 +4,14 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING);
 $pages = [
     'home' => 'home.php',
     'gallery' => 'gallery.php',
-    'most1' => 'php/most1.php',
-    'most2' => 'php/most2.php',
-    'most3' => 'php/most3.php',
-    'most4' => 'php/most4.php',
-    'most5' => 'php/most5.php',
-    'changebackground' => 'php/changebackground.php',
-    'kontakt' => 'php/kontakt.php',
-    'videos'=> 'php/videos.php'
+    'most1' => 'html/most1.html',
+    'most2' => 'html/most2.html',
+    'most3' => 'html/most3.html',
+    'most4' => 'html/most4.html',
+    'most5' => 'html/most5.html',
+    'changebackground' => 'html/changebackground.html',
+    'kontakt' => 'html/kontakt.html',
+    'videos'=> 'html/videos.html'
 ];
 
 $page = isset($_GET['page']) ? $_GET['page'] : 'home';

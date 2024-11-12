@@ -1,5 +1,5 @@
 function loadMenu() {
-    const isInPhpFolder = window.location.pathname.includes("/php/");
+    const isInPhpFolder = window.location.pathname.includes("/html/");
     const pathPrefix = isInPhpFolder ? "../" : "";
 
     const menu = `

@@ -23,6 +23,3 @@ rekordów, to nawet jak znajdzie ten dla nas najważniejszy – zapytanie będzi
 samego kooca bazy. Jest to niepotrzebne obciążenie, gdy wiemy, że wynik już został znaleziony.
 TIP 5. W bazach MySQL, zapytanie LIMIT można użyd z dwoma parametrami, początku i kooca –
 używa się to najczęściej do tworzenia stronicowania długich list rekordów.
-TIP 6. Tu w naszej stronie pojawia się potencjalna luka w zabezpieczeniach, wszędzie tam gdzie są
-pobierane pola z POST lub GET, należy byd czułym na zagrożenie. Ktoś może próbowad podstawid
-inne parametry, a nawet całe kody skryptów i przejąd kontrolę nad stroną lub wykraśd wrażliwe dane.

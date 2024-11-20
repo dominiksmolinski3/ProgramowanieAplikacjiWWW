@@ -1,61 +1,101 @@
 body {
-    background-color: white;
-    font-family: Arial, sans-serif;
-}
-.main{
-    background-image: url('../img/oskar.jpg');
-    background-repeat: no-repeat;
+    margin-top: 120px;  
+    min-height: 100vh;  
     background-size: cover;
-    font-family: Arial, sans-serif;
-
+    background-position: center;
 }
 
+.centered-content {
+    margin-top: 70px;  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+}
+
+#zegarek, #data {
+    font-size: 24px;
+    text-align: center;
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.centered-clock {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* Menu styling */
 .menu {
+    display: flex;
     width: 100%;
+    border-collapse: collapse;
+    justify-content: center;
     background-color: #333;
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    
-    
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    position: fixed; 
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000; 
 }
 
 .menu td {
-    padding: 15px;
     text-align: center;
+    vertical-align: middle;
+    padding: 15px 20px;
+    margin: 0 10px;
     background-color: #444;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* smooth transition */
+}
+
+.menu td:hover {
+    background-color: #555;
+    transform: translateY(-3px); /* slight lifting effect */
 }
 
 .menu td a {
     color: white;
     text-decoration: none;
     font-weight: bold;
+    font-family: 'Arial', sans-serif;
+    font-size: 18px;
 }
 
-.menu td:hover {
-    background-color: #555;
-}
-.menu td:active{
-    background-color: #566;
-}
-
+/* Text and image alignment */
 .text-format {
     text-align: justify;
     line-height: 1.6;
-}
-.text-formatmain {
-    text-align: center;
-    line-height: 1.6;
-    color: white;
-    font-weight: bold;
-    text-shadow: 1px 1px 2px black;
+    clear: both;
+    overflow: hidden;
+    padding: 20px;
 }
 
+h1 {
+    text-align: center; 
+    margin-left: 0;    
+}
+
+/* Image alignment */
 img {
     float: left;
-    margin: 0 15px 15px 0;
+    margin-right: 15px;
+    margin-bottom: 15px;
+    max-width: 600px; /* Ensure images don't get too large */
 }
 
+/* Bold, italic, underline, highlight styles */
 .bold {
     font-weight: bold;
 }
@@ -69,132 +109,64 @@ img {
 }
 
 .highlight {
-    background-color: yellow;
-}
-.text-format{
-    max-width: fit-content;
-    margin-inline: auto;
-    font-size: large;
+    background-color: rgb(255, 255, 140);
+    font-weight: bold;
 }
 
-.media{
-    margin-top:45px;
-    
-    font-size: 30px;
+/* Adding clearfix to ensure proper image layout */
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
 }
 
-.container {
+.contact {
     display: flex;
-    flex-direction: column; 
-    align-items: flex-start; 
-    margin-left: 20px;
-}
-.socials {
-    margin-bottom: 20px; 
-    width: 100px; 
-    height: auto; 
-    margin-left:70px;
-}
-.media{
-    margin-left:295px;    
-}
-.kontakt{
-    margin-left:5px;
-}
-.form-container {
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     max-width: 400px;
     margin: 0 auto;
-    float: left;
-}
-.item {
-    display: flex; 
-    align-items: center; 
-    margin-bottom: 10px;
-    font-size: large;
-    font-weight: bold;
-}
-.img {
-    float: left; 
-   
-}
-.Watch{
-    display: flex; 
-    justify-content: left;
-    font-size: large;
-    font-weight: bold;
-}
-.wtw{
-    display: flex;
-    
-}
-.button {
-    padding: 10px 20px;
-    background-color: #333;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin: 10px;               
-    transition: background-color 0.3s ease;
-   
-}
-.centered-form {
-    display: flex;               
-    flex-direction: column;      
-    align-items: center;         
-    justify-content: center;     
-    height: 100vh;             
 }
 
+/* Button styles */
 
-.button:hover {
-    background-color: #555;
-}
-
-#zegarek-container {
-    position: absolute;
-    top: 20px;
-    left: 1px;
-    padding: 60px;
-}
-
-#zegarek, #data {
-    background-color: #f0f0f0;
-    color: #333;
-    font-size: 18px;
-    padding: 10px 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    font-family: 'Arial', sans-serif;
-    margin-top: 10px;
-    text-align: center;
-    min-width: 120px;
-}
-
-#zegarek:hover, #data:hover {
-    background-color: #d4edda;
-    color: #155724;
-    transition: background-color 0.3s ease;
-}
-.test-block {
-    width: 200px;
-    border: 2px solid rgba(71, 236, 30, 1);
-    background: rgba(71, 236, 30, 0.7);
-    text-align: center;
-    color: #000;
-    padding: 20px;
-    cursor: pointer;
+form {
     display: flex;
     justify-content: center;
     align-items: center;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
 }
 
+input[type="button"] {
+    background-color: #4CAF50; 
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px 5px;
+    cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="button"]:hover {
+    background-color: #45a049;
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+input[type="button"]:active {
+    background-color: #3e8e41;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transform: translateY(2px);
+}

@@ -1,2 +1,9 @@
 
 /lab3/animacje
+lab8/composer.json
+lab8/composer.lock
+lab8/vendor/autoload.php
+lab8/vendor/composer/autoload_classmap.php
+lab8/vendor/composer/autoload_namespaces.php
+lab8/vendor/composer/autoload_psr4.php
+/lab8/vendor

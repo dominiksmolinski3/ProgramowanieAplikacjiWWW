@@ -10,6 +10,7 @@ $config = require '../cfgsmtp.php';
 function PokazKontakt() {
     echo '
     <form method="post" action="contact.php">
+        <h2>Formularz Kontaktowy</h2>
         <label for="email">Twój e-mail:</label><br>
         <input type="email" name="email" id="email" required><br><br>
 
@@ -21,11 +22,18 @@ function PokazKontakt() {
 
         <input type="hidden" name="action" value="sendContact">
         <input type="submit" value="Wyślij">
+    </form>
+    <hr>
+    <h2>Przypomnij hasło</h2>
+    <form method="post" action="contact.php">
+        <input type="hidden" name="action" value="remindPassword">
+        <input type="email" name="email" id="email_reminder" placeholder="Podaj e-mail" required><br><br>
+        <input type="submit" value="Przypomnij hasło">
     </form>';
 }
 
 // Function to send contact email
-function WyslijMailKontakt($odbiorca, $config) {
+function WyslijMailKontakt($config) {
     if (empty($_POST['temat']) || empty($_POST['tresc']) || empty($_POST['email'])) {
         echo 'Nie wypełniłeś wszystkich pól.';
         return;
@@ -45,7 +53,7 @@ function WyslijMailKontakt($odbiorca, $config) {
 
         // Mail details
         $mail->setFrom($config['smtp_username'], 'Formularz Kontaktowy');
-        $mail->addAddress($odbiorca);
+        $mail->addAddress($_POST['email']); // Use the email provided in the form
 
         $mail->isHTML(false);
         $mail->Subject = $_POST['temat'];
@@ -53,13 +61,24 @@ function WyslijMailKontakt($odbiorca, $config) {
 
         $mail->send();
         echo "Wiadomość została wysłana.";
+
+        // Redirect after sending the email to prevent resending on refresh
+        header("Location: contact.php?success=true");
+        exit;
+
     } catch (Exception $e) {
         echo "Błąd podczas wysyłania wiadomości: {$mail->ErrorInfo}";
     }
 }
 
 // Function to send admin password reminder
-function PrzypomnijHaslo($odbiorca, $config) {
+function PrzypomnijHaslo($config) {
+    if (empty($_POST['email'])) {
+        // Show error message if the email field is empty after form submission
+        echo 'Proszę podać adres e-mail.';
+        return;
+    }
+
     $mail = new PHPMailer(true);
 
     try {
@@ -74,13 +93,18 @@ function PrzypomnijHaslo($odbiorca, $config) {
 
         // Mail details
         $mail->setFrom($config['smtp_username'], 'Administrator');
-        $mail->addAddress($odbiorca);
+        $mail->addAddress($_POST['email']); // Use the email provided in the form
 
         $mail->Subject = 'Przypomnienie hasła do panelu admina';
         $mail->Body = "Twoje hasło do panelu admina to: " . $config['admin_password'];
 
         $mail->send();
         echo 'Wiadomość z przypomnieniem hasła została wysłana.';
+
+        // Redirect after sending the password reminder
+        header("Location: contact.php?password_reminder=true");
+        exit;
+
     } catch (Exception $e) {
         echo "Błąd podczas wysyłania wiadomości: {$mail->ErrorInfo}";
     }
@@ -92,19 +116,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     switch ($action) {
         case 'sendContact':
-            WyslijMailKontakt('recipient@example.com', $config); // Use recipient email
+            WyslijMailKontakt($config);
             break;
         case 'remindPassword':
-            PrzypomnijHaslo('recipient@example.com', $config); // Use admin email
+            PrzypomnijHaslo($config);
             break;
     }
 } else {
     // Display the appropriate form based on the GET parameter
-    if (isset($_GET['action']) && $_GET['action'] === 'remindPassword') {
-        echo '<form method="post" action="contact.php">
-                <input type="hidden" name="action" value="remindPassword">
-                <input type="submit" value="Przypomnij hasło">
-              </form>';
+    if (isset($_GET['success']) && $_GET['success'] === 'true') {
+        echo '<p>Wiadomość została pomyślnie wysłana!</p>';
+        PokazKontakt();
+    } elseif (isset($_GET['password_reminder']) && $_GET['password_reminder'] === 'true') {
+        echo '<p>Wiadomość z przypomnieniem hasła została wysłana!</p>';
+        PokazKontakt();
     } else {
         PokazKontakt();
     }

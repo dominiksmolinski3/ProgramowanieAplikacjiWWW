@@ -12,4 +12,4 @@ jest przesłanie specjalnego linka z możliwością zresetowania hasła do konta
 Zadanie 4. Zaimplementuj kod z przykładu poniżej do zaprogramowania metody WyslijMailKontakt().
 Przykład metody wysyłającej mail z użyciem standardowej poczty serwera:
 TIP 3. Maila można wysyład również z pomocą połączenia się do IMAP lub SMTP z użyciem klasycznej
-skrzynki pocztowej
+skrzynki pocztowej. 

@@ -2,12 +2,31 @@
 session_start();
 include '../cfg.php';
 
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    die('Unable to start session.');
+}
+
 function FormularzLogowania() {
     echo '<form method="post">
             Login: <input type="text" name="login"><br>
             Hasło: <input type="password" name="pass"><br>
             <input type="submit" value="Zaloguj">
           </form>';
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_SESSION['zalogowany'])) {
+    include '../cfg.php'; // This file should define $login and $pass variables
+
+    $entered_login = $_POST['login'] ?? '';
+    $entered_pass = $_POST['pass'] ?? '';
+
+    if ($entered_login === $login && $entered_pass === $pass) {
+        $_SESSION['zalogowany'] = true;
+        header("Location: admin.php"); // Redirect to avoid resubmission of the form
+        exit;
+    } else {
+        echo "Nieprawidłowy login lub hasło.";
+    }
 }
 
 // Sprawdzanie, czy użytkownik jest zalogowany

@@ -7,3 +7,6 @@ lab8/vendor/composer/autoload_classmap.php
 lab8/vendor/composer/autoload_namespaces.php
 lab8/vendor/composer/autoload_psr4.php
 /lab8/vendor
+/lab9/vendor
+lab9/composer.lock
+lab9/composer.json

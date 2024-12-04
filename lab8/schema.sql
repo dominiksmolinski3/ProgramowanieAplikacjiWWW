@@ -15,8 +15,7 @@ INSERT INTO `page_list` (`id`, `page_title`, `page_content`, `status`) VALUES
 (4, 'most1', '<!DOCTYPE html>\n<html lang="pl">\n<head>\n    <meta charset="UTF-8">\n    <title>Mosty</title>\n</head>\n<body onload="loadMenu(); loadBackground(); startclock();">\n    <div id="menu"></div>\n    <div id="zegarek"></div>\n    <div id="data"></div>\n    <h1>Most Akashi Kaikyō</h1>\n    <div class="text-format">\n        <img src="img/akashi.jpg" alt="Most Akashi Kaikyō" width="600">\n        <p><span class="highlight">Most <span class="underline">Akashi Kaikyō</span>, znany również jako <span class="italic">Pearl Bridge</span>, łączy miasta <span class="italic">Kobe</span> i <span class="italic">Awaji</span> na wyspie <span class="italic">Awaji.</span></span></p>\n        <p><span class="highlight">Jego konstrukcja rozpoczęła się w 1988 roku, a ukończono ją w 1998 roku. Most jest odporny na trzęsienia ziemi i silne wiatry, co czyni go jednym z najbezpieczniejszych mostów na świecie.</span></p>\n    </div>\n</body>\n</html>', 1),
 (5, 'most2', '<!DOCTYPE html>\n<html lang="pl">\n<head>\n    <meta charset="UTF-8">\n    <title>Mosty</title>\n</head>\n<body onload="loadMenu(); loadBackground(); startclock();">\n    <div id="menu"></div>\n    <div id="zegarek"></div>\n    <div id="data"></div>\n    <h1>Most Hong Kong-Zhuhai-Macau</h1>\n    <div class="text-format">\n        <img src="img/zhuhai.jpg" alt="Most Hong Kong-Zhuhai-Macau" width="600">\n        <p><span class="highlight">Most <span class="underline">Hong Kong-Zhuhai-Macau</span> to najdłuższy most morski na świecie, łączący <span class="italic">Hongkong, Zhuhai i Makau.</span></span></p>\n        <p><span class="highlight">Rozciąga się na dystansie 55 kilometrów i jest jednym z największych osiągnięć współczesnej inżynierii w Chinach.</span></p>\n    </div>\n</body>\n</html>', 1),
 (6, 'most3', '<!DOCTYPE html>\n<html lang="pl">\n<head>\n    <meta charset="UTF-8">\n    <title>Mosty</title>\n</head>\n<body onload="loadMenu(); loadBackground(); startclock();">\n    <div id="menu"></div>\n\n    <div id = "zegarek"></div>\n    <div id = "data"></div>\n    <h1>Golden Gate Bridge</h1>\n    <div class="text-format">\n        <img src="img/goldengate.jpg" alt="Golden Gate Bridge" width="600">\n        <p><span class="highlight">Most <span class="underline">Golden Gate</span> to jeden z najbardziej rozpoznawalnych mostów na świecie, znajdujący się w <span class="italic">San Francisco, USA.</span></span></p>\n        <p><span class="highlight">Został ukończony w 1937 roku i przez wiele lat był najdłuższym mostem wiszącym na świecie.</span></p>\n    </div>\n</body>\n</html>', 1),
-(7, 'most4', '<!DOCTYPE html>\n<html lang="pl">\n<head>\n    <meta charset="UTF-8">\n    <title>Mosty</title>\n</head>\n<body onload="loadMenu(); loadBackground(); startclock();">\n    <div id="menu"></div>\n    <div id = "zegarek"></div>\n    <div id = "data"></div>\n    <h1>Most Millau</h1>\n    <div class="text-format">\n        <img src="img/millau.jpg" alt="Most Millau" width="600">\n        <p><span class="highlight">Most <span class="underline">Millau</span> to most wiszący znajdujący się w południowej Francji.</span></p>\n        <p><span class="highlight">Został ukończony w 2004 roku i jest jednym z najwyższych mostów na świecie.</span></p>\n    </div>\n</body>\n</html>', 1),
-(8, 'most5', '<!DOCTYPE html>
+(7, 'most4', '<!DOCTYPE html>
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
@@ -31,12 +30,37 @@ INSERT INTO `page_list` (`id`, `page_title`, `page_content`, `status`) VALUES
 
     <h1>Most Vasco da Gama</h1>
     <div class="text-format">
-        <img src="img/vasco.jpg" alt="Most Vasco da Gama" width="600">
+        <img src="img/vascodagama.jpg" alt="Most Vasco da Gama" width="600">
         <p>
             <span class="highlight">Most <span class="underline">Vasco da Gama</span> to najdłuższy most w <span class="italic">Europie.</span></span>
         </p>
         <p>
             <span class="highlight">Znajduje się w <span class="italic">Lizbonie, Portugalia</span>, a jego długość wynosi 17,2 km.</span>
+        </p>
+    </div>
+</body>
+</html>', 1),
+(8, 'most5', '<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Mosty</title>
+</head>
+<body onload="loadMenu(); loadBackground(); startclock();">
+    <div id="menu"></div>
+
+    <div id = "zegarek"></div>
+    
+    <div id = "data"></div>
+
+    <h1>Most Brooklyn Bridge</h1>
+    <div class="text-format">
+        <img src="img/brooklynbridge.jpg" alt="Most Brooklyn Bridge" width="600">
+        <p>
+            <span class="highlight">Most <span class="underline">Brooklyn Bridge</span>, otwarty w 1883 roku, jest jednym z najstarszych mostów wiszących na świecie, łącząc <span class="italic">Manhattan z Brooklynem w Nowym Jorku.</span></span>
+        </p>
+        <p>
+            <span class="highlight">Most ten stał się symbolem inżynieryjnych osiągnięć XIX wieku, a jego neogotyckie wieże przyciągają miliony turystów rocznie.</span>
         </p>
     </div>
 </body>

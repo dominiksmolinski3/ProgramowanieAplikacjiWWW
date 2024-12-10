@@ -35,11 +35,12 @@ if (empty($content)) {
     $content = file_get_contents('home.php'); 
 }
 
-$template = file_get_contents('html (backup)/template.html');
+$template = file_get_contents('template.html');
 if ($template === false) {
     die("Error: Template file not found or inaccessible.");
 }
 
+// Notyfikacja przy braku strony/kiedy strona jest wylaczona
 $notificationScript = '';
 if ($notification) {
     $notificationScript = "
@@ -54,6 +55,7 @@ if ($notification) {
     $template = str_replace('</body>', $notificationScript . '</body>', $template);
 }
 
+// zaladowanie contentu strony
 $output = str_replace('{{content}}', $content, $template);
 
 echo $output;

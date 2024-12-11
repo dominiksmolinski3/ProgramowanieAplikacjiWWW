@@ -10,3 +10,6 @@ lab8/vendor/composer/autoload_psr4.php
 /lab9/vendor
 lab9/composer.lock
 lab9/composer.json
+lab10/composer.json
+lab10/composer.lock
+/lab10/vendor

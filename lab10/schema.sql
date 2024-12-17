@@ -128,3 +128,5 @@ CREATE TABLE IF NOT EXISTS categories (
             nazwa VARCHAR(255) NOT NULL,
             FOREIGN KEY (matka) REFERENCES categories(id) ON DELETE CASCADE
         ) ENGINE=InnoDB;
+
+INSERT INTO categories (id, nazwa, matka) VALUES (0, 'Root', NULL);

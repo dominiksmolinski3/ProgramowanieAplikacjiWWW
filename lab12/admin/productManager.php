@@ -21,12 +21,25 @@ class ProductManager {
             $base64Image = '';
         }
     
+        // Cast kategoria_id to int
+        $kategoria_id = (int)$kategoria_id;
+
         // Prepare and execute the SQL query to insert the product
         $stmt = $this->conn->prepare("INSERT INTO products (tytul, opis, data_wygasniecia, cena_netto, podatek_vat, ilosc, status_dostepnosci, kategoria_id, gabaryt, zdjecie) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssddiibbs", $tytul, $opis, $data_wygasniecia, $cena_netto, $podatek_vat, $ilosc, $status_dostepnosci, $kategoria_id, $gabaryt, $base64Image);
-        $stmt->execute();
+        if (!$stmt) {
+            die("Prepare failed: " . $this->conn->error);
+        }
+
+        $stmt->bind_param("sssddiiiss", $tytul, $opis, $data_wygasniecia, $cena_netto, $podatek_vat, $ilosc, $status_dostepnosci, $kategoria_id, $gabaryt, $base64Image);
+
+        if (!$stmt->execute()) {
+            die("Execute failed: " . $stmt->error);
+        }
+
+    
         $stmt->close();
     }
+    
     
 
     // Usuń produkt

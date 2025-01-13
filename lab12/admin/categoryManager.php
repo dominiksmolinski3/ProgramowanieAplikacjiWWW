@@ -56,19 +56,25 @@ class CategoryManager {
     }
 
     public function displayCategoriesForSelect($parentId = 0, $level = 0) {
+        // Prepare the query to fetch categories with the specified parent ID
         $stmt = $this->conn->prepare("SELECT id, nazwa FROM categories WHERE matka = ?");
         $stmt->bind_param("i", $parentId);
         $stmt->execute();
         $result = $stmt->get_result();
-    
+        
+        // Iterate through each category and display it as an option in the dropdown
         while ($row = $result->fetch_assoc()) {
-            echo '<option value="' . $row['id'] . '">' . str_repeat("--", $level) . ' ' . $row['nazwa'] . '</option>';
-            // Recursively get subcategories
+            // Display the category with indentation based on level
+            echo '<option value="' . $row['id'] . '">' . str_repeat("--", $level) . ' ' . htmlspecialchars($row['nazwa']) . '</option>';
+            
+            // Recursively display subcategories, incrementing the level for nested categories
             $this->displayCategoriesForSelect($row['id'], $level + 1);
         }
-    
+        
+        // Close the prepared statement
         $stmt->close();
     }
+    
     
     
 }

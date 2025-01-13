@@ -188,11 +188,10 @@ function UsunKategorie($categoryManager, $id) {
 
 function ListaKategorii($categoryManager) {
     echo "<h3>Lista kategorii</h3>";
-    echo "<a href='admin.php?type=category&action=add'>Dodaj kategorię</a><br><br>";
-
+    echo "<a href='admin.php?type=category&action=add'>Dodaj kategorię</a><br>";
+    echo "<a href='admin.php'>Powróć do listy podstron</a><br><br>";
     $categoryManager->displayCategories();
 
-    echo "<a href='admin.php'>Powróć do listy podstron</a>";
 }
 
 
@@ -205,6 +204,8 @@ function ListaPodstron() {
 
     echo "<h3>Lista podstron</h3>";
     echo "<a href='admin.php?action=add'>Dodaj stronę</a><br>";
+    echo "<a href='admin.php?type=category'>Przejdz do kategorii</a><br>";
+    echo "<a href='admin.php?type=product'>Przejdz do produktow</a><br>";
 
     if ($result->num_rows > 0) {
         // Wyświetlanie wyników w tabeli
@@ -224,8 +225,6 @@ function ListaPodstron() {
         echo "Brak podstron w bazie.";
     }
 
-    echo "<a href='admin.php?type=category'>Przejdz do kategorii</a><br>";
-    echo "<a href='admin.php?type=product'>Przejdz do produktow</a><br>";
 }
 
 
@@ -283,8 +282,8 @@ function DodajNowaPodstrone() {
         echo "<a href='admin.php'>Powróć do listy podstron</a>";
     } else {
         // Wyświetlanie formularza
-        echo '<h3>Dodaj Nową Podstronę</h3>';
         echo '<form method="post">
+                <h3>Dodaj Nową Podstronę</h3>
                 Tytuł: <input type="text" name="page_title"><br>
                 Treść: <textarea name="page_content"></textarea><br>
                 Aktywna: <input type="checkbox" name="status"><br>
@@ -296,8 +295,8 @@ function DodajNowaPodstrone() {
 
 function UsunPodstrone($id) {
     // Display a confirmation form instead of relying on JavaScript
-    echo '<h3>Czy na pewno chcesz usunąć tę podstronę?</h3>';
     echo '<form method="post" action="admin.php?action=delete_confirmed">
+            <h3>Czy na pewno chcesz usunąć tę podstronę?</h3>
             <input type="hidden" name="id" value="' . $id . '">
             <button type="submit">Tak, usuń</button>
             <button type="button" onclick="window.location.href=\'admin.php\'">Anuluj</button>
@@ -340,8 +339,9 @@ function DodajProdukt($productManager) {
         $gabaryt = $_POST['gabaryt'];
         $zdjecie = $_FILES['zdjecie']['name']; // Assuming image upload handling will be done
 
-        $productManager->addProduct($tytul, $opis, $data_wygasniecia, $cena_netto, $podatek_vat, $ilosc, $status_dostepnosci, $kategoria_id, $gabaryt, $zdjecie);
+        $kategoria_id = (int)$kategoria_id;
 
+        $productManager->addProduct($tytul, $opis, $data_wygasniecia, $cena_netto, $podatek_vat, $ilosc, $status_dostepnosci, $kategoria_id, $gabaryt, $zdjecie);
         echo "Produkt został dodany!<br>";
         echo "<a href='admin.php?type=product'>Powróć do listy produktów</a>";
     } else {
@@ -434,11 +434,10 @@ function UsunProdukt($productManager, $id) {
 function ListaProduktow($productManager) {
     echo "<h3>Lista produktów</h3>";
     echo "<a href='admin.php?type=product&action=add'>Dodaj produkt</a><br><br>";
-
+    echo "<a href='admin.php'>Powróć do listy podstron</a><br><br>";
     $productManager->displayProducts();
-
-    echo "<a href='admin.php'>Powróć do listy podstron</a>";
 }
+
 
 
 

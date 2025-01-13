@@ -35,8 +35,8 @@ function PokazKontakt() {
         <input type="submit" value="Wyślij">
     </form>
     <hr>
-    <h2>Przypomnij hasło</h2>
     <form method="post" action="contact.php">
+        <h2>Przypomnij hasło</h2>
         <input type="hidden" name="action" value="remindPassword">
         <input type="email" name="email" id="email_reminder" placeholder="Podaj e-mail" required><br><br>
         <input type="submit" value="Przypomnij hasło">

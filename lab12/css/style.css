@@ -1,8 +1,16 @@
+/* Global styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    cursor: url('../img/cursor.png'), auto;
+}
+
 body {
-    margin-top: 120px;  
-    min-height: 100vh;  
-    background-size: cover;
-    background-position: center;
+    margin-bottom: 50px; /* Ensure there's space for the footer */
+    background-color: #f8f9fa;
+    color: #333;
 }
 
 .centered-content {
@@ -169,4 +177,112 @@ input[type="button"]:active {
     background-color: #3e8e41;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     transform: translateY(2px);
+}
+
+.shop-icon {
+    width: 75px;
+    height: 75px;
+    transition: transform 0.3s ease;
+}
+
+.shop-icon:hover {
+    transform: scale(1.2); /* Optional: adds a hover effect */
+}
+
+/* Main content */
+.content {
+    padding-bottom: 60px; /* Make room for the footer if content is short */
+}
+
+/* Footer Styles */
+.footer {
+    position: fixed;  /* Fixed position at the bottom of the screen */
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 6px 0;
+    z-index: 9999; /* Ensures footer stays on top of other content */
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer p {
+    font-size: 10px;
+    margin: 0;
+}
+
+/* Floating Icon Styles */
+.floating-icon {
+    position: fixed;  /* Fixed position to make it float */
+    bottom: 60px;  /* Distance from the bottom of the screen */
+    right: 40px;   /* Distance from the right side of the screen */
+    z-index: 10000;  /* Make sure it's above other elements */
+    cursor: pointer;  /* Changes cursor to pointer when hovered */
+    transition: transform 0.3s ease; /* Add a transition effect */
+    display: inline-block;
+}
+
+.floating-icon:hover {
+    transform: scale(1.1); /* Slightly enlarge the icon when hovered */
+}
+
+.floating-icon img {
+    width: 75px;  /* Adjust size of the icon */
+    height: 75px;
+    border-radius: 50%;  /* Makes the icon circular */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);  /* Optional: adds shadow */
+}
+
+/* Optional: Add hover effect for the floating icon */
+.floating-icon:hover img {
+    filter: brightness(1.2); /* Makes the icon a bit brighter on hover */
+}
+
+/* Floating Text */
+.floating-text {
+    position: absolute;
+    bottom: 90px;  /* Position the text above the icon */
+    right: 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 14px;
+    display: none;  /* Hide text initially */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Show the floating text when hovering the icon */
+.floating-icon:hover .floating-text {
+    display: block;
+    opacity: 1;
+}
+
+/* Animation for appearing text periodically */
+@keyframes appear-text {
+    0% {
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.floating-text.show {
+    display: block;
+    opacity: 1;
+    animation: appear-text 5s ease-in-out;  /* Text will appear for 5 seconds */
 }

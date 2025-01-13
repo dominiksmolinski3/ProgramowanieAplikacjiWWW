@@ -4,6 +4,7 @@
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
+    cursor: url('../img/cursor.png'), auto;
 }
 
 body {
@@ -15,6 +16,10 @@ body {
 h2 {
     font-size: 24px;
     margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
 }
 
 /* Style dla przycisków */
@@ -60,9 +65,44 @@ h2 {
     margin-bottom: 10px;
 }
 
-.product p {
-    font-size: 16px;
-    margin-bottom: 10px;
+h4 {
+    font-size: 36px; /* Large text size */
+    margin-bottom: 15px;
+    margin-left: 150px;
+    margin-right: 150px;
+    font-family: 'Arial', sans-serif; /* Clean sans-serif font */
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    color: #f14f4f; /* White text color for contrast */
+
+    background: linear-gradient(45deg, #ff6ec7, #ff9a8b); /* Cool gradient background */
+    -webkit-background-clip: text; /* Apply gradient to text */
+    background-clip: text; /* Make gradient fill the text */
+    
+    text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3); /* Soft shadow for depth */
+    transition: transform 0.3s ease, color 0.3s ease, text-shadow 0.3s ease; /* Smooth transitions */
+}
+
+/* Hover effect to add animation */
+h4:hover {
+    transform: scale(1.1); /* Slightly increase size */
+    color: #ff7a65; /* Change text color */
+    text-shadow: 8px 8px 15px rgba(0, 0, 0, 0.5); /* Stronger shadow */
+}
+
+
+/* Show the bottom border when hovered */
+h4:hover::after {
+    opacity: 1;
+}
+
+/* Add a glow effect to text */
+h4:focus {
+    outline: none; /* Remove focus outline */
+    box-shadow: 0 0 10px rgba(255, 0, 128, 0.7); /* Glowing effect */
 }
 
 .add-to-cart {
@@ -102,4 +142,181 @@ tr:nth-child(even) {
 
 tr:hover {
     background-color: #e9ecef;
+}
+
+/* Stylizacja ogólna dla kontenera, który zawiera sidebar */
+.center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%; /* Zapewnia, że kontener zajmuje całą szerokość */
+    height: 35vh; /* Zapewnia, że kontener zajmuje całą wysokość */
+    position: relative;
+}
+
+/* Stylizacja dla sidebaru */
+.sidebar {
+    width: 300px; /* Szerokość sidebaru */
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: white; /* Tło sidebaru */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Cień dla sidebaru */
+    text-align: center;
+}
+
+/* Stylizacja przycisków */
+.btn {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+/* Stylizacja przycisku */
+.btn-back {
+    margin-top: 10px;
+    display: inline-block;
+    padding: 15px 30px;
+    background: linear-gradient(45deg, #ff6ec7, #ff9a8b); /* Gradient kolorów */
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    text-transform: uppercase;
+    border-radius: 50px; /* Zaokrąglone rogi */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+/* Efekt podczas najechania myszką */
+.btn-back:hover {
+    background: linear-gradient(45deg, #ff9a8b, #ff6ec7); /* Zmiana kierunku gradientu */
+    transform: scale(1.1); /* Powiększenie przycisku */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Animacja na hover - subtelny ruch */
+.btn-back::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: all 0.5s ease;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+}
+
+.btn-back:hover::before {
+    width: 0;
+    height: 0;
+    opacity: 1;
+}
+
+/* Efekt podczas kliknięcia */
+.btn-back:active {
+    transform: scale(0.95);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for the form and select element */
+.category-dropdown {
+    display: inline-block;
+    position: relative;
+    width: 200px;
+}
+
+.category-dropdown select {
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 16px;
+    color: #333;
+    background: #fff;
+    border: 2px solid #ccc;
+    border-radius: 25px;
+    appearance: none; /* Remove default dropdown arrow */
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Custom arrow for the select dropdown */
+.category-dropdown::after {
+    content: '\25BC'; /* Downward arrow */
+    font-size: 18px;
+    color: #333;
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+/* Hover and focus effects for the select */
+.category-dropdown select:hover,
+.category-dropdown select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+/* Style for the option elements */
+.category-dropdown option {
+    padding: 10px;
+}
+
+/* Style for selected option */
+.category-dropdown select option:checked {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Add some spacing and centering for better layout */
+.category-dropdown form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* Style for the placeholder option */
+.category-dropdown select option[value=""]:disabled {
+    color: #888; /* Light gray text */
+    background-color: #f2f2f2; /* Light background to indicate it's a placeholder */
+    font-style: italic; /* Italic text to indicate it's a placeholder */
+}
+
+/* Style for the select dropdown itself when placeholder is selected */
+.category-dropdown select option[value=""]:hover {
+    color: #333; /* Darker text color on hover */
+    background-color: #f0f0f0; /* Slightly darker background */
+}
+
+.product p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+b {
+    font-size: 24px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    color: #ff0000; /* Make the text red to highlight it */
+    font-weight: bold; /* Make the text bold for emphasis */
+    text-align: center; /* Center align the text */
+    background-color: #f8d7da; /* Light red background for better visibility */
+    padding: 15px; /* Add some padding around the text */
+    border-radius: 8px; /* Round the corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }

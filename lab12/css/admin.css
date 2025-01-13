@@ -1,3 +1,6 @@
+* {
+    cursor: url('../img/cursor.png'), auto;
+}
 /* General Styles */
 body {
     font-family: Arial, sans-serif;

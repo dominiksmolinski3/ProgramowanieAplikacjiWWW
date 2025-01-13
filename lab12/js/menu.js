@@ -15,6 +15,9 @@ function loadMenu() {
                 <td><a href="${pathPrefix}index.php?page=most5">Brooklyn Bridge</a></td>
                 <td><a href="${pathPrefix}index.php?page=kontakt">Kontakt</a></td>
                 <td><a href="${pathPrefix}index.php?page=changebackground">Zmień tło</a></td>
+                <a href="${pathPrefix}index.php?page=shop">
+                    <img src="${pathPrefix}img/shoppingcart.png" alt="Shop" class="shop-icon"/>
+                </a>
             </tr>
         </table>`;
 

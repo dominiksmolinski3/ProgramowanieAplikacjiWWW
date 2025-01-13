@@ -13,11 +13,17 @@ $pages = [
     'most5' => 'most5',
     'changebackground' => 'changebackground',
     'kontakt' => 'kontakt',
-    'videos' => 'videos'
+    'videos' => 'videos',
+    'shop' => 'shop'
 ];
 
 $page = isset($_GET['page']) ? $_GET['page'] : '';
 $page_title = isset($pages[$page]) ? $pages[$page] : '';
+
+if ($page == 'shop') {
+    include 'shop.php';  // This will include the shop page directly
+    exit;  // Stop further execution of the script
+}
 
 $stmt = $mysqli->prepare("SELECT page_content, status FROM page_list WHERE page_title = ? LIMIT 1");
 $stmt->bind_param('s', $page_title); 
@@ -29,10 +35,10 @@ $notification = '';
 
 if (empty($content)) {
     $notification = "The page was not found.";
-    $content = file_get_contents('home.php'); 
+    $content = file_get_contents('home.html'); 
 } elseif ($status == 0) {
     $notification = "The page is inactive and is not available.";
-    $content = file_get_contents('home.php'); 
+    $content = file_get_contents('home.html'); 
 }
 
 $template = file_get_contents('template.html');

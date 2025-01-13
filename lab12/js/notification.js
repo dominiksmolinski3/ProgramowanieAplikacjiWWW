@@ -24,3 +24,24 @@ function showNotification(message, type = "info") {
         document.body.removeChild(notification);
     }, 3000);
 }
+
+
+// Function to show floating text for a specified time
+function showFloatingTextForTime(textElement, displayTime) {
+    // Show the floating text
+    textElement.classList.add('show');
+    
+    // Hide the text after the specified time
+    setTimeout(function () {
+        textElement.classList.remove('show');
+    }, displayTime);  // The text will be visible for displayTime (in ms)
+}
+
+// Initialize and show floating text after page load
+document.addEventListener("DOMContentLoaded", function () {
+    let floatingText = document.querySelector('.floating-text');
+
+    // Show text for 5 seconds after page load
+    showFloatingTextForTime(floatingText, 5000);
+
+});

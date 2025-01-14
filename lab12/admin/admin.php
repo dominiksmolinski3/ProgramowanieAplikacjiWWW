@@ -204,6 +204,7 @@ function ListaPodstron() {
 
     echo "<h3>Lista podstron</h3>";
     echo "<a href='admin.php?action=add'>Dodaj stronę</a><br>";
+    echo "<a href='contact.php'>Przejdz do kontaktu</a><br>";
     echo "<a href='admin.php?type=category'>Przejdz do kategorii</a><br>";
     echo "<a href='admin.php?type=product'>Przejdz do produktow</a><br>";
 

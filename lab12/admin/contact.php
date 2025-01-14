@@ -19,6 +19,7 @@ $config = require '../cfg/cfgsmtp.php';
 
 // Function to display the contact form
 function PokazKontakt() {
+    echo "<strong><a href='admin.php'>Wróć do panelu głównego</a></strong><br>";
     echo '
     <form method="post" action="contact.php">
         <h2>Formularz Kontaktowy</h2>

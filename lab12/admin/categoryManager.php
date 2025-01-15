@@ -33,7 +33,7 @@ class CategoryManager {
         $stmt->close();
     }
 
-    // Wyświetl kategorie z rekurencją
+    // Wyświetl kategorie z rekurencją (with edit and delete buttons)
     public function displayCategories($parentId = 0, $level = 0) {
         $stmt = $this->conn->prepare("SELECT id, nazwa FROM categories WHERE matka = ?");
         $stmt->bind_param("i", $parentId);
@@ -41,12 +41,26 @@ class CategoryManager {
         $result = $stmt->get_result();
 
         while ($row = $result->fetch_assoc()) {
-            echo str_repeat("--", $level) . " " . $row['nazwa'] . "<br>";
+            // Display category name with indentation based on the level
+            echo str_repeat("--", $level) . " " . $row['nazwa'];
+            
+            // Display Edit and Delete buttons
+            echo '<a href="admin.php?type=category&action=edit&id=' . $row['id'] . '">
+                    <button>Edytuj</button>
+                  </a> ';
+            echo '<a href="admin.php?type=category&action=delete&id=' . $row['id'] . '">
+                    <button>Usuń</button>
+                  </a>';
+            echo "<br>";
+            
+            // Recursively display subcategories
             $this->displayCategories($row['id'], $level + 1);
         }
 
         $stmt->close();
     }
+    
+    // Get category by id
     public function getCategory($id) {
         $stmt = $this->conn->prepare("SELECT * FROM categories WHERE id = ?");
         $stmt->bind_param("i", $id);
@@ -55,27 +69,19 @@ class CategoryManager {
         return $result->fetch_assoc();
     }
 
+    // Display categories in a dropdown for selection
     public function displayCategoriesForSelect($parentId = 0, $level = 0) {
-        // Prepare the query to fetch categories with the specified parent ID
         $stmt = $this->conn->prepare("SELECT id, nazwa FROM categories WHERE matka = ?");
         $stmt->bind_param("i", $parentId);
         $stmt->execute();
         $result = $stmt->get_result();
         
-        // Iterate through each category and display it as an option in the dropdown
         while ($row = $result->fetch_assoc()) {
-            // Display the category with indentation based on level
             echo '<option value="' . $row['id'] . '">' . str_repeat("--", $level) . ' ' . htmlspecialchars($row['nazwa']) . '</option>';
-            
-            // Recursively display subcategories, incrementing the level for nested categories
             $this->displayCategoriesForSelect($row['id'], $level + 1);
         }
         
-        // Close the prepared statement
         $stmt->close();
     }
-    
-    
-    
 }
 ?>

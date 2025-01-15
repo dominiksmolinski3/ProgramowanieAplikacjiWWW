@@ -52,11 +52,27 @@ class ProductManager {
 
     // Edytuj produkt
     public function editProduct($id, $tytul, $opis, $data_wygasniecia, $cena_netto, $podatek_vat, $ilosc, $status_dostepnosci, $kategoria_id, $gabaryt, $zdjecie) {
+        // Check if a new image was uploaded
+        if (isset($_FILES['zdjecie']) && $_FILES['zdjecie']['error'] === UPLOAD_ERR_OK) {
+            // Handle the uploaded file
+            $fileContent = file_get_contents($_FILES['zdjecie']['tmp_name']);
+            $base64Image = base64_encode($fileContent);
+        } else {
+            // If no new image is uploaded, retain the existing image (use the passed image parameter)
+            $base64Image = $zdjecie;
+        }
+    
+        // Prepare the SQL query to update the product
         $stmt = $this->conn->prepare("UPDATE products SET tytul = ?, opis = ?, data_wygasniecia = ?, cena_netto = ?, podatek_vat = ?, ilosc = ?, status_dostepnosci = ?, kategoria_id = ?, gabaryt = ?, zdjecie = ? WHERE id = ?");
-        $stmt->bind_param("sssddiibbsi", $tytul, $opis, $data_wygasniecia, $cena_netto, $podatek_vat, $ilosc, $status_dostepnosci, $kategoria_id, $gabaryt, $zdjecie, $id);
-        $stmt->execute();
+        $stmt->bind_param("sssddiiissi", $tytul, $opis, $data_wygasniecia, $cena_netto, $podatek_vat, $ilosc, $status_dostepnosci, $kategoria_id, $gabaryt, $base64Image, $id);
+    
+        if (!$stmt->execute()) {
+            die("Execute failed: " . $stmt->error);
+        }
+    
         $stmt->close();
     }
+    
 
     // Wyświetl produkty
     public function displayProducts() {
@@ -64,7 +80,7 @@ class ProductManager {
         while ($row = $result->fetch_assoc()) {
             // Display product details
             echo "ID: {$row['id']}, Tytuł: {$row['tytul']}, Cena netto: {$row['cena_netto']}, VAT: {$row['podatek_vat']}, Ilość: {$row['ilosc']}, Dostępność: " . ($row['status_dostepnosci'] ? "Dostępny" : "Niedostępny") . "<br>";
-    
+        
             // Display image if available
             if (!empty($row['zdjecie'])) {
                 echo 'Zdjęcie: <img src="data:image/jpeg;base64,' . $row['zdjecie'] . '" alt="' . $row['tytul'] . '" style="width:100px;height:auto;"><br>';
@@ -72,9 +88,18 @@ class ProductManager {
                 echo "Brak zdjęcia<br>";
             }
     
-            echo "<br>";
+            // Add Edit and Delete buttons
+            echo '<a href="admin.php?type=product&action=edit&id=' . $row['id'] . '">
+                    <button>Edytuj</button>
+                  </a> ';
+            echo '<a href="admin.php?type=product&action=delete&id=' . $row['id'] . '">
+                    <button>Usuń</button>
+                  </a>';
+    
+            echo "<br><br>";
         }
     }
+    
     
     
 
@@ -89,6 +114,17 @@ class ProductManager {
         $stmt->close();
 
         return $available ? "Produkt dostępny" : "Produkt niedostępny";
+    }
+
+    public function getProduct($id) {
+        $stmt = $this->conn->prepare("SELECT * FROM products WHERE id = ?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $product = $result->fetch_assoc();
+        $stmt->close();
+    
+        return $product;
     }
 }
 ?>

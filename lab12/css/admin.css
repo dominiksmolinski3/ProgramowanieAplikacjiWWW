@@ -44,20 +44,39 @@ textarea {
 }
 
 input[type="submit"], button {
-    background-color: #3498db;
+    background-color: #25333d;
     color: white;
     padding: 10px 20px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    text-decoration: none;
 }
 
 input[type="submit"]:hover, button:hover {
     background-color: #2980b9;
+    text-decoration: underline; 
 }
 
+a {
+    background-color: #25333d;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
+}
+
+a:hover {
+    background-color: #2980b9;
+    text-decoration: underline; 
+}
+
+
 input[type="button"], button {
-    background-color: #3498db;
+    background-color: #4b7997;
     color: white;
     padding: 10px 20px;
     border: none;
@@ -71,15 +90,6 @@ input[type="button"]:hover, button:hover {
 
 input[type="hidden"] {
     display: none;
-}
-
-a {
-    color: #3498db;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
 }
 
 hr {

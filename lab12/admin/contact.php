@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formularz Kontaktowy</title>
     <link rel="stylesheet" href="../css/admin.css">
+    <link rel="icon" href="../img/webicon.png" type="image/png">
 </head>
 <body>
 <?php

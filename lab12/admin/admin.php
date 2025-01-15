@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Admina</title>
     <link rel="stylesheet" href="../css/admin.css">
+    <link rel="icon" href="../img/webicon.png" type="image/png">
 </head>
 <body>
 <?php
@@ -142,8 +143,8 @@ function DodajKategorie($categoryManager) {
         echo "Kategoria została dodana!<br>";
         echo "<a href='admin.php?type=category'>Powróć do listy kategorii</a>";
     } else {
-        echo '<h3>Dodaj kategorię</h3>';
         echo '<form method="post">
+                <h3>Dodaj kategorię</h3>
                 Nazwa: <input type="text" name="name" required><br>
                 Rodzic: 
                 <select name="parent_id">
@@ -151,6 +152,7 @@ function DodajKategorie($categoryManager) {
         $categoryManager->displayCategoriesForSelect();
         echo '  </select><br>
                 <input type="submit" value="Dodaj">
+                <a href=admin.php?type=category>Powróć do listy kategorii</a>
               </form>';
     }
 }
@@ -179,6 +181,7 @@ function EdytujKategorie($categoryManager, $id) {
               </form>';
     }
 }
+
 function UsunKategorie($categoryManager, $id) {
     $categoryManager->deleteCategory($id);
 
@@ -289,6 +292,7 @@ function DodajNowaPodstrone() {
                 Treść: <textarea name="page_content"></textarea><br>
                 Aktywna: <input type="checkbox" name="status"><br>
                 <input type="submit" value="Dodaj Podstronę">
+                <a href=admin.php>Powróć do listy podstron</a>
               </form>';
     }
 }
@@ -346,8 +350,8 @@ function DodajProdukt($productManager) {
         echo "Produkt został dodany!<br>";
         echo "<a href='admin.php?type=product'>Powróć do listy produktów</a>";
     } else {
-        echo '<h3>Dodaj produkt</h3>';
         echo '<form method="post" enctype="multipart/form-data">
+                <h3>Dodaj produkt</h3>
                 Tytuł: <input type="text" name="tytul" required><br>
                 Opis: <textarea name="opis" required></textarea><br>
                 Data wygaśnięcia: <input type="date" name="data_wygasniecia"><br>
@@ -369,6 +373,7 @@ function DodajProdukt($productManager) {
                 </select><br>
                 Zdjęcie: <input type="file" name="zdjecie" accept="image/*" required><br>
                 <input type="submit" value="Dodaj">
+                <a href=admin.php>Powróć do listy podstron</a><br><br>
               </form>';
     }
 }
@@ -388,11 +393,6 @@ function EdytujProdukt($productManager, $id) {
         $gabaryt = $_POST['gabaryt'];
         $zdjecie = $_FILES['zdjecie']['name'];
 
-        // Handle file upload for the image
-        if ($_FILES['zdjecie']['error'] === UPLOAD_ERR_OK) {
-            move_uploaded_file($_FILES['zdjecie']['tmp_name'], 'uploads/' . $zdjecie);
-        }
-
         // Update the product details
         $productManager->editProduct($id, $tytul, $opis, $data_wygasniecia, $cena_netto, $podatek_vat, $ilosc, $status_dostepnosci, $kategoria_id, $gabaryt, $zdjecie);
 
@@ -402,8 +402,8 @@ function EdytujProdukt($productManager, $id) {
         // Fetch current product data
         $product = $productManager->getProduct($id);
 
-        echo '<h3>Edytuj produkt</h3>';
         echo '<form method="post" enctype="multipart/form-data">
+                <h3>Edytuj produkt</h3>
                 Tytuł: <input type="text" name="tytul" value="' . htmlspecialchars($product['tytul']) . '"><br>
                 Opis: <textarea name="opis">' . htmlspecialchars($product['opis']) . '</textarea><br>
                 Data wygaśnięcia: <input type="date" name="data_wygasniecia" value="' . $product['data_wygasniecia'] . '"><br>
@@ -412,14 +412,22 @@ function EdytujProdukt($productManager, $id) {
                 Ilość: <input type="number" name="ilosc" value="' . $product['ilosc'] . '" required><br>
                 Status dostępności: <input type="checkbox" name="status_dostepnosci" value="1" ' . ($product['status_dostepnosci'] ? 'checked' : '') . '><br>
                 Kategoria: 
-                <select name="kategoria_id">';
-        global $categoryManager;
-        $categoryManager->displayCategoriesForSelect(0, 0);
-        echo '  </select><br>
-                Gabaryt: <input type="text" name="gabaryt" value="' . $product['gabaryt'] . '"><br>
-                Zdjęcie: <input type="file" name="zdjecie" accept="image/*"><br>
-                <input type="submit" value="Zapisz">
-              </form>';
+                <select name="kategoria_id">
+                    <option value="0">Bez kategorii</option>';
+                    global $categoryManager;
+                    $categoryManager->displayCategoriesForSelect();
+                    echo '  </select><br>
+                            Gabaryt: 
+                            <select name="gabaryt">
+                                <option value="small">Small</option>
+                                <option value="medium">Medium</option>
+                                <option value="large">Large</option>
+                            </select><br>
+                            Zdjęcie: <input type="file" name="zdjecie" accept="image/*" required><br>
+                            <br>
+                            <input type="submit" value="Dodaj"><br><br>
+                            <a href=admin.php>Powróć do listy podstron</a><br><br>
+                          </form>';
     }
 }
 
@@ -436,8 +444,12 @@ function ListaProduktow($productManager) {
     echo "<h3>Lista produktów</h3>";
     echo "<a href='admin.php?type=product&action=add'>Dodaj produkt</a><br><br>";
     echo "<a href='admin.php'>Powróć do listy podstron</a><br><br>";
+
+    // Call displayProducts method to display the products
     $productManager->displayProducts();
 }
+
+
 
 
 

@@ -43,8 +43,6 @@ function displayCategoryDropdown() {
     echo '</form>';
 }
 
-
-
 // Funkcja do wyświetlania kategorii i produktów
 function displayCategoriesAndProducts() {
     global $mysqli;
@@ -123,29 +121,49 @@ function displayCategoriesAndProducts() {
     fetchCategoriesAndProducts(0, $categoryId);
 }
 
-
-
-
-
-
-
 // Funkcja dodająca produkt do koszyka
-function addToCart($productId) {
-    if (!isset($_SESSION['cart'])) {
-        $_SESSION['cart'] = [];
-    }
+function addToCart($productId, $quantity = 1) {
+    global $mysqli;
 
-    $found = false;
-    foreach ($_SESSION['cart'] as &$item) {
-        if ($item['id'] == $productId) {
-            $item['quantity']++;
-            $found = true;
-            break;
+    // Check if the product exists in the database and get the stock quantity
+    $query = "SELECT ilosc FROM products WHERE id = $productId";
+    $result = $mysqli->query($query);
+
+    if ($result && $result->num_rows > 0) {
+        $product = $result->fetch_assoc();
+        $availableStock = $product['ilosc'];
+
+        // If the requested quantity is greater than the available stock, set an error message
+        if ($quantity > $availableStock) {
+            $_SESSION['cart_error'] = 'Niestety, nie posiadamy tyle towaru w asortymencie.';
+            return; // Stop adding the product to the cart
         }
-    }
 
-    if (!$found) {
-        $_SESSION['cart'][] = ['id' => $productId, 'quantity' => 1];
+        // Proceed with adding the product to the cart
+        if (!isset($_SESSION['cart'])) {
+            $_SESSION['cart'] = [];
+        }
+
+        $found = false;
+        foreach ($_SESSION['cart'] as &$item) {
+            if ($item['id'] == $productId) {
+                // If the product is already in the cart, update its quantity
+                if ($item['quantity'] + $quantity <= $availableStock) {
+                    $item['quantity'] += $quantity;
+                    $found = true;
+                } else {
+                    $_SESSION['cart_error'] = 'Niestety, nie posiadamy tyle towaru w asortymencie.';
+                }
+                break;
+            }
+        }
+
+        if (!$found) {
+            // Add the product to the cart if it's not already there
+            $_SESSION['cart'][] = ['id' => $productId, 'quantity' => $quantity];
+        }
+    } else {
+        $_SESSION['cart_error'] = 'Produkt nie istnieje lub wystąpił błąd podczas pobierania danych o produkcie.';
     }
 }
 
@@ -199,7 +217,6 @@ function showCart() {
     }
 }
 
-
 // Funkcja do usuwania produktu z koszyka
 function removeFromCart($productId) {
     foreach ($_SESSION['cart'] as $key => $item) {
@@ -215,6 +232,48 @@ function clearCart() {
     $_SESSION['cart'] = [];
 }
 
+
+
+
+?>
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/shop.css">
+    <title>Sklep</title>
+    <link rel="icon" href="img/webicon.png" type="image/png">
+</head>
+<body>
+
+<div class="center-container">
+    <div class="sidebar">
+        <?php displayCategoryDropdown(); ?>
+        
+        <a href="shop.php?view_cart=true" class="btn-back">Zobacz koszyk</a>
+        <a href="shop.php" class="btn-back">Powrót do produktów</a>
+        <a href="index.php?page=home" class="btn-back">Powrót na stronę</a>
+    </div>
+</div>
+
+
+
+<?php
+// Check if there is an error message in the session
+if (isset($_SESSION['cart_error'])) {
+    // Output the JavaScript alert with the error message
+    echo "<script>alert('" . htmlspecialchars($_SESSION['cart_error'], ENT_QUOTES, 'UTF-8') . "');</script>";
+    // Clear the error message after displaying it
+    unset($_SESSION['cart_error']);
+}
+
+if (!isset($_GET['view_cart'])) {
+    displayCategoriesAndProducts();  // Wyświetlamy produkty pogrupowane po kategoriach
+} else {
+    showCart();  // Wyświetlamy koszyk
+}
 // Obsługa żądań HTTP (dodawanie do koszyka, usuwanie z koszyka, czyszczenie koszyka)
 if (isset($_GET['add_to_cart'])) {
     $productId = (int)$_GET['add_to_cart'];
@@ -240,12 +299,24 @@ if (isset($_GET['update_cart'])) {
     if (isset($_GET['quantity'])) {
         foreach ($_GET['quantity'] as $productId => $newQuantity) {
             $newQuantity = (int)$newQuantity;
-            if ($newQuantity > 0) {
-                // Zaktualizuj ilość produktu w koszyku
-                foreach ($_SESSION['cart'] as &$item) {
-                    if ($item['id'] == $productId) {
-                        $item['quantity'] = $newQuantity;
-                        break;
+            
+            // Check if the new quantity is available in stock
+            $query = "SELECT ilosc FROM products WHERE id = $productId";
+            $result = $mysqli->query($query);
+            if ($result && $result->num_rows > 0) {
+                $product = $result->fetch_assoc();
+                $availableStock = $product['ilosc'];
+
+                // Update the quantity if available stock is sufficient
+                if ($newQuantity > $availableStock) {
+                    echo "<script>alert('Niestety, nie posiadamy tyle towaru w asortymencie.');</script>";
+                } else {
+                    // Update the quantity in the cart
+                    foreach ($_SESSION['cart'] as &$item) {
+                        if ($item['id'] == $productId) {
+                            $item['quantity'] = $newQuantity;
+                            break;
+                        }
                     }
                 }
             }
@@ -253,37 +324,6 @@ if (isset($_GET['update_cart'])) {
     }
     header('Location: shop.php?view_cart=true');
     exit;
-}
-
-?>
-
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/shop.css">
-    <title>Sklep</title>
-</head>
-<body>
-
-<div class="center-container">
-    <div class="sidebar">
-        <?php displayCategoryDropdown(); ?>
-        
-        <a href="shop.php?view_cart=true" class="btn-back">Zobacz koszyk</a>
-        <a href="shop.php" class="btn-back">Powrót do produktów</a>
-        <a href="index.php?page=home" class="btn-back">Powrót na stronę</a>
-    </div>
-</div>
-
-
-
-<?php
-if (!isset($_GET['view_cart'])) {
-    displayCategoriesAndProducts();  // Wyświetlamy produkty pogrupowane po kategoriach
-} else {
-    showCart();  // Wyświetlamy koszyk
 }
 ?>
 
